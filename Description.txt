@@ -1,0 +1,34 @@
+Zugalu Unity Developer Test
+When complete please send the unity project files to both Branden@zugalu.com and Garrett@zugalu.com with your prototype submission. 
+Build a simple Real Time Strategy Game.
+The demo will start with a standard main menu UI. The main menu should consist of an input text field for entering in the player’s name, a start button that will start the game when clicked, and a quit button that will close the application when clicked. 
+ 
+The game will involve a simple mechanic from any real time strategy game. When the game starts, the camera should be pointing at a “Unit” (defined as a default 3D object: capsule or box…) that is resting on a ground object. The player can then click on the unit to select it. There needs to be an indication to the player that the object has been selected. When a unit is selected, the player can then click anywhere on the ground to dispatch the unit to move towards the new position. There should be a barrier between the original location of the unit and the newly marked position preventing the object from being able to move directly to the new location. A pathway must be made so the object will move around the barrier to the marked location.
+
+Create a “Turret” object on the ground. The “turret” should be operable as such; if a unit gets within a variable range defined via inspector property then the turret should shoot at the unit. Collision detection and handling is not required.
+
+There should also be a UI text display in the top center of the screen that displays the name the user entered at the main menu.
+All graphics should be unity default objects (cubes, quads, capsules…) 
+Feel free to use as many default Unity tools and services as necessary.
+
+
+
+The following items should be highlighted in your project:
+Unity Knowledge
+C# programming experience
+Time management
+Best practices in unity and performance optimization. 
+
+FAQ:
+Q: What files would we like:
+A: ZIP containing all the unity project files and source code
+
+Q: what version of unity:
+A: The current version would be ideal, but others should be okay. 
+
+Q: How should the unit encounter the barrier:
+A: The barrier can exist in the game already (some type of wall shape) that the unit must path around with no additional user input. Other then the user clicks to send the unit to the other side of the obstacle 
+
+Q: Do we need to create a visible pathway:
+4. The unit does not need to create a visible pathway, it only needs to move around the barrier using a pathway it creates upon encountering the barrier. With no extra user input.  
+
