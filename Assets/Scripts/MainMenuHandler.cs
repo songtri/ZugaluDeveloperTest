@@ -23,7 +23,10 @@ public class MainMenuHandler : MonoBehaviour
 			ErrorPopup.SetActive(true);
 		}
 		else
+		{
+			GlobalData.userName = UserNameInputField.text;
 			SceneManager.LoadSceneAsync("02_GameScene");
+		}
 	}
 
 	public void OnClickExit()
