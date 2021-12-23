@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4050672114905587577
+--- !u!1 &8161787349063959465
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,68 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9022705274891347410}
-  - component: {fileID: 7342490468753256053}
-  - component: {fileID: 3012478959715927856}
-  - component: {fileID: 7706633422948733309}
-  - component: {fileID: 2295247269435146935}
+  - component: {fileID: 6831248839574384774}
+  - component: {fileID: 8759838524568137198}
+  - component: {fileID: 1864601933487637358}
+  - component: {fileID: 7725388954205775563}
+  - component: {fileID: 3890963291852541277}
   m_Layer: 0
-  m_Name: DefaultUnit
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9022705274891347410
+--- !u!4 &6831248839574384774
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050672114905587577}
+  m_GameObject: {fileID: 8161787349063959465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7342490468753256053
+--- !u!114 &8759838524568137198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050672114905587577}
+  m_GameObject: {fileID: 8161787349063959465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8510471b3a1d83245b970d36f9d4e3b4, type: 3}
+  m_Script: {fileID: 11500000, guid: fb7dd50d2e3dfce479ec2fafbff50fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultColor: {r: 0, g: 1, b: 0, a: 1}
+  DefaultColor: {r: 0.9450981, g: 0.31764707, b: 0.13725491, a: 1}
   SelectedColor: {r: 0, g: 0, b: 1, a: 1}
   InitialStat:
-    Name: Unit
+    Name: Turret
     HitPoint: 100
-    MoveSpeed: 5
-    AttackRange: 0
-    AttackSpeed: 0
-    AttackPower: 0
---- !u!33 &3012478959715927856
+    MoveSpeed: 0
+    AttackRange: 5
+    AttackSpeed: 2
+    AttackPower: 10
+--- !u!33 &1864601933487637358
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050672114905587577}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7706633422948733309
+  m_GameObject: {fileID: 8161787349063959465}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7725388954205775563
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050672114905587577}
+  m_GameObject: {fileID: 8161787349063959465}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -104,17 +104,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2295247269435146935
-CapsuleCollider:
+--- !u!65 &3890963291852541277
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050672114905587577}
+  m_GameObject: {fileID: 8161787349063959465}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

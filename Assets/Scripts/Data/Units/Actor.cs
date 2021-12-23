@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-	private Vector3 position;
-	private Material defaultMat;
+	[SerializeField]
+	private Color DefaultColor = Color.green;
+	[SerializeField]
+	private Color SelectedColor = Color.blue;
 
-	private readonly Color DefaultColor = Color.green;
-	private readonly Color SelectedColor = Color.blue;
+	protected Material defaultMat;
 
 	public Action onSelectedHandler;
 	public Action onDeselectHandler;
 
-	private void Start()
+	protected Vector3 moveToPosition;
+	protected bool isMoving = false;
+
+	protected virtual void Start()
 	{
 		var materials = GetComponent<MeshRenderer>()?.materials;
 		if (materials.Length > 0)
@@ -22,11 +26,12 @@ public class Actor : MonoBehaviour
 			defaultMat = materials[0];
 			defaultMat.color = DefaultColor;
 		}
+
+		isMoving = false;
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
-		
 	}
 
 	public void Selected()
@@ -41,8 +46,10 @@ public class Actor : MonoBehaviour
 		onDeselectHandler?.Invoke();
 	}
 
-	public void MoveTo(Vector2 destPos)
+	public void MoveTo(Vector3 destPos)
 	{
+		moveToPosition = destPos;
+		isMoving = true;
 	}
 
 	public void Attack()

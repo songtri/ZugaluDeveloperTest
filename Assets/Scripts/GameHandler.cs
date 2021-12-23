@@ -5,21 +5,25 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
 	[SerializeField]
-	private Camera mainCamera = null;
+	private Camera MainCamera = null;
 	[SerializeField]
-	private GameUIHandler uiHandler = null;
+	private GameUIHandler UiHandler = null;
+	[SerializeField]
+	private GameObject Map = null;
+	[SerializeField]
+	private Transform UnitParent = null;
 
 	private GameObject tempSelectedObject = null;
 	private Actor selectedObject = null;
+	private GameObject movePositionIndicator = null;
 
-	private GameObject map = null;
 	private List<Actor> unitList = new List<Actor>();
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		var actors = FindObjectsOfType<Actor>();
-		unitList.AddRange(actors);
+		SpawnMap();
+		SpawnObjects();
 	}
 
 	// Update is called once per frame
@@ -27,39 +31,95 @@ public class GameHandler : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			tempSelectedObject = GetClickedObject();
+			if (GetClickedObject(out RaycastHit hit))
+			{
+				tempSelectedObject = hit.collider.gameObject;
+			}
 		}
 		else if (Input.GetMouseButtonUp(0))
 		{
-			if (tempSelectedObject != null && tempSelectedObject == GetClickedObject())
+			if (tempSelectedObject != null && GetClickedObject(out RaycastHit hit))
 			{
-				var actor = tempSelectedObject.GetComponent<Actor>();
-				if (actor != null)
+				if (tempSelectedObject == hit.collider.gameObject)
 				{
-					actor.Selected();
-					if (actor != selectedObject)
+					if (tempSelectedObject.tag == "map")
 					{
 						if (selectedObject != null)
-							selectedObject.Deselected();
-						selectedObject = actor;
+						{
+							ShowMoveIndicator(hit.point);
+							selectedObject.MoveTo(hit.point);
+						}
+					}
+					else
+					{
+						var actor = tempSelectedObject.GetComponent<Actor>();
+						if (actor != null)
+						{
+							actor.Selected();
+							if (actor != selectedObject)
+							{
+								if (selectedObject != null)
+									selectedObject.Deselected();
+								selectedObject = actor;
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 
-	private void SpawnObjects()
+	private void SpawnMap()
 	{
+		var mapObj = GameObject.Find("DefaultMap");
+		if (mapObj != null)
+		{
+			Map = mapObj;
+			var mr = Map.GetComponent<MeshRenderer>();
+			if(mr.materials != null && mr.materials.Length > 0)
+			{
+				mr.materials[0].color = Color.yellow;
+			}
+		}
 	}
 
-	private GameObject GetClickedObject()
+	private void SpawnObjects()
 	{
-		Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast(ray, out RaycastHit hit))
+		Vector3[] unitsPos = new Vector3[] {
+			new Vector3(-1, 1, -1),
+			new Vector3(-1, 1, 1),
+			new Vector3(1, 1, -1),
+			new Vector3(1, 1, 1)
+		};
+
+		for (int i = 0; i < unitsPos.Length; ++i)
 		{
-			return hit.collider.gameObject;
+			var unit = UnitFactory.CreateUnit(0, UnitParent, unitsPos[i]);
+			if (unit != null)
+				unitList.Add(unit);
 		}
 
-		return null;
+		var building = UnitFactory.CreateBuilding(0, UnitParent, new Vector3(10, 2, 10));
+		if (building != null)
+			unitList.Add(building);
+	}
+
+	private bool GetClickedObject(out RaycastHit hitInfo)
+	{
+		Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+		if (Physics.Raycast(ray, out hitInfo))
+		{
+			return true;
+		}
+
+		hitInfo = default(RaycastHit);
+		return false;
+	}
+
+	private void ShowMoveIndicator(Vector3 pos)
+	{
+		movePositionIndicator = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		movePositionIndicator.transform.localPosition = pos;
+		movePositionIndicator.AddComponent<MoveToIndicator>();
 	}
 }
