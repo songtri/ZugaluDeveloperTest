@@ -9,6 +9,7 @@ public class MoveToIndicator : MonoBehaviour
 
 	private void Start()
 	{
+		gameObject.name = "MoveIndicator";
 		timer = TimeToLive;
 		transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 

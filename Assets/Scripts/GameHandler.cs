@@ -9,7 +9,7 @@ public class GameHandler : MonoBehaviour
 	[SerializeField]
 	private GameUIHandler UiHandler = null;
 	[SerializeField]
-	private GameObject Map = null;
+	private Transform MapParent = null;
 	[SerializeField]
 	private Transform UnitParent = null;
 
@@ -76,14 +76,52 @@ public class GameHandler : MonoBehaviour
 
 	private void SpawnMap()
 	{
-		var mapObj = GameObject.Find("DefaultMap");
+		string[] mapData =
+		{
+			"1111111111111111111111111111111111111111",
+			"1111111111111111111111111111111111111111",
+			"1111111111111111111111111111111111111111",
+			"1111111000000000001111111111111111111111",
+			"1111111111111111111111111111111111111111",
+			"1111111111111000000001111111111111111111",
+			"1111111111111111111111111111111111111111",
+			"1111111111000000001111111111111111111111",
+			"1111111111111111111111111111111111111111",
+			"1111111111111111111111111111011111111111",
+			"1111111111111111111111111111011111111111",
+			"1111111111111111111111111111011101111111",
+			"1111111111111111111111111111011101111111",
+			"1111111111111111111111111111011101111111",
+			"1111111111111111111111111111011101111111",
+			"1111111111111111111111111111011101111111",
+			"1111111111111111111111111111111101111111",
+			"1111111111111111111111111111111101111111",
+			"1111111111111111111111111111111111111111",
+			"1111111111111111111111111111111111111111",
+		};
+
+		var mapObj = Resources.Load("Maps/DefaultMap") as GameObject;
 		if (mapObj != null)
 		{
-			Map = mapObj;
-			var mr = Map.GetComponent<MeshRenderer>();
-			if(mr.materials != null && mr.materials.Length > 0)
+			int mapSizeX = mapData.Length;
+			for (int i = 0; i < mapSizeX; ++i)
 			{
-				mr.materials[0].color = Color.yellow;
+				int mapSizeY = mapData[i].Length;
+				for (int j = 0; j < mapSizeY; ++j)
+				{
+					var go = Instantiate(mapObj, MapParent);
+					//go.transform.position = new Vector3(i - mapSizeX / 2, 0f, j - mapSizeY / 2);
+					go.transform.position = new Vector3(j - mapSizeY / 2, 0f, mapSizeX - i - mapSizeX / 2);
+					var mr = go.GetComponent<MeshRenderer>();
+					if (mr != null && mr.materials != null && mr.materials.Length > 0)
+					{
+						//if (mapData[i, j])
+						if(mapData[i][j] == '1')
+							mr.materials[0].color = Color.yellow;
+						else
+							mr.materials[0].color = Color.red;
+					}
+				}
 			}
 		}
 	}

@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
 
 	private void Start()
 	{
+		gameObject.name = "Bullet";
 		transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
 		var renderer = GetComponent<MeshRenderer>();
