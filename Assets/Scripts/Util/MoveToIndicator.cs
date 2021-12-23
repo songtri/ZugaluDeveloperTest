@@ -15,7 +15,7 @@ public class MoveToIndicator : MonoBehaviour
 		var renderer = GetComponent<MeshRenderer>();
 		if (renderer != null && renderer.materials.Length > 0)
 		{
-			renderer.materials[0].color = Color.red;
+			renderer.materials[0].color = Color.green;
 		}
 	}
 

@@ -5,9 +5,9 @@ using UnityEngine;
 public class Unit : Actor
 {
 	[SerializeField]
-	private Stats InitialStat = null;
+	protected Stats InitialStat = null;
 
-	private Stats CurrentStat = null;
+	protected Stats CurrentStat = null;
 
 	protected override void Start()
 	{
@@ -22,10 +22,30 @@ public class Unit : Actor
 
 		if (isMoving)
 		{
-			var moveDir = moveToPosition - transform.localPosition;
-			moveDir.y = 0f;
+			move();
+		}
+	}
+
+	public override void OnAttacked(Actor attacker)
+	{
+		base.OnAttacked(attacker);
+	}
+
+	protected override void move()
+	{
+		moveToPosition.y = transform.position.y;
+		var moveDir = moveToPosition - transform.position;
+		moveDir.y = 0f;
+
+		if (moveDir.sqrMagnitude < 0.001f)
+		{
+			transform.position = moveToPosition;
+			isMoving = false;
+		}
+		else
+		{
 			moveDir.Normalize();
-			transform.localPosition = transform.localPosition + moveDir * CurrentStat.MoveSpeed * Time.deltaTime;
+			transform.position += moveDir * CurrentStat.MoveSpeed * Time.deltaTime;
 		}
 	}
 }

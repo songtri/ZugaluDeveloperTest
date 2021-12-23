@@ -20,7 +20,7 @@ public static class UnitFactory
 		var go = Object.Instantiate(Resources.Load($"Units/Characters/{prefabName}"), parent) as GameObject;
 		if (go != null)
 		{
-			go.transform.localPosition = initialPos;
+			go.transform.position = initialPos;
 			return go.GetComponent<Actor>();
 		}
 
@@ -43,7 +43,7 @@ public static class UnitFactory
 		var go = Object.Instantiate(Resources.Load($"Units/Buildings/{prefabName}"), parent) as GameObject;
 		if (go != null)
 		{
-			go.transform.localPosition = initialPos;
+			go.transform.position = initialPos;
 			return go.GetComponent<Actor>();
 		}
 

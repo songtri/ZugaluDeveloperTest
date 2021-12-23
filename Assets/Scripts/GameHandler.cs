@@ -17,6 +17,10 @@ public class GameHandler : MonoBehaviour
 	private Actor selectedObject = null;
 	private GameObject movePositionIndicator = null;
 
+	public List<Actor> UnitList
+	{
+		get => unitList;
+	}
 	private List<Actor> unitList = new List<Actor>();
 
 	// Start is called before the first frame update
@@ -29,6 +33,7 @@ public class GameHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		// handle input
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (GetClickedObject(out RaycastHit hit))
@@ -42,7 +47,7 @@ public class GameHandler : MonoBehaviour
 			{
 				if (tempSelectedObject == hit.collider.gameObject)
 				{
-					if (tempSelectedObject.tag == "map")
+					if (tempSelectedObject.CompareTag("map"))
 					{
 						if (selectedObject != null)
 						{
@@ -96,12 +101,18 @@ public class GameHandler : MonoBehaviour
 		{
 			var unit = UnitFactory.CreateUnit(0, UnitParent, unitsPos[i]);
 			if (unit != null)
+			{
+				unit.gameHandler = this;
 				unitList.Add(unit);
+			}
 		}
 
 		var building = UnitFactory.CreateBuilding(0, UnitParent, new Vector3(10, 2, 10));
 		if (building != null)
+		{
+			building.gameHandler = this;
 			unitList.Add(building);
+		}
 	}
 
 	private bool GetClickedObject(out RaycastHit hitInfo)
@@ -112,7 +123,7 @@ public class GameHandler : MonoBehaviour
 			return true;
 		}
 
-		hitInfo = default(RaycastHit);
+		hitInfo = default;
 		return false;
 	}
 

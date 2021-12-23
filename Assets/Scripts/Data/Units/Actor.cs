@@ -18,13 +18,19 @@ public class Actor : MonoBehaviour
 	protected Vector3 moveToPosition;
 	protected bool isMoving = false;
 
+	public GameHandler gameHandler = null;
+
 	protected virtual void Start()
 	{
-		var materials = GetComponent<MeshRenderer>()?.materials;
-		if (materials.Length > 0)
+		var renderer = GetComponent<MeshRenderer>();
+		if (renderer != null)
 		{
-			defaultMat = materials[0];
-			defaultMat.color = DefaultColor;
+			var materials = renderer.materials;
+			if (materials.Length > 0)
+			{
+				defaultMat = materials[0];
+				defaultMat.color = DefaultColor;
+			}
 		}
 
 		isMoving = false;
@@ -52,11 +58,15 @@ public class Actor : MonoBehaviour
 		isMoving = true;
 	}
 
-	public void Attack()
+	public virtual void OnAttack(Actor target)
 	{
 	}
 
-	public void move()
+	public virtual void OnAttacked(Actor attacker)
+	{
+	}
+
+	protected virtual void move()
 	{
 	}
 }
