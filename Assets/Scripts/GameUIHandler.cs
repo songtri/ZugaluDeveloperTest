@@ -14,9 +14,8 @@ public class GameUIHandler : MonoBehaviour
 		UserName.text = GlobalData.userName;
 	}
 
-	// Update is called once per frame
-	void Update()
+	public void OnClickExit()
 	{
-		
+		Application.Quit();
 	}
 }
