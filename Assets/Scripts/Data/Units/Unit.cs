@@ -33,14 +33,19 @@ public class Unit : Actor
 
 	protected override void move()
 	{
-		moveToPosition.y = transform.position.y;
-		var moveDir = moveToPosition - transform.position;
-		moveDir.y = 0f;
+		var moveDir = intermediateMoveToPosition - transform.position;
 
-		if (moveDir.sqrMagnitude < 0.001f)
+		if (moveDir.sqrMagnitude < 0.01f)
 		{
-			transform.position = moveToPosition;
-			isMoving = false;
+			transform.position = intermediateMoveToPosition;
+			++currentMoveIndex;
+			if (currentMoveIndex >= movePath.Count)
+				isMoving = false;
+			else
+			{
+				intermediateMoveToPosition = movePath[currentMoveIndex].worldPos;
+				intermediateMoveToPosition.y = transform.position.y;
+			}
 		}
 		else
 		{
