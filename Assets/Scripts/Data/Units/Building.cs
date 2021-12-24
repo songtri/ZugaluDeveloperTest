@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : Actor
+public class Building : Actor, Attackable
 {
 	[SerializeField]
 	protected Stats InitialStat = null;
@@ -46,10 +46,8 @@ public class Building : Actor
 		}
 	}
 
-	public override void OnAttack(Actor target)
+	public void OnAttack(Actor target)
 	{
-		base.OnAttack(target);
-
 		attackTimer = 1f / CurrentStat.AttackSpeed;
 
 		var obj  = GameObject.CreatePrimitive(PrimitiveType.Cube);

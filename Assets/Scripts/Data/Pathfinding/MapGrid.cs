@@ -8,23 +8,6 @@ public class MapGrid
 	private int sizeX = 0;
 	private int sizeY = 0;
 
-	//public void CreateMapGrid(string[] mapData)
-	//{
-	//	sizeX = mapData.Length;
-	//	sizeY = mapData[0].Length;
-
-	//	nodes = new MapNode[sizeX, sizeY];	// suppose map is square (width and height are same length
-	//	for (int i = 0; i < sizeX; ++i)
-	//	{
-	//		int mapSizeY = mapData[i].Length;
-	//		for (int j = 0; j < mapSizeY; ++j)
-	//		{
-	//			//var node = new MapNode(mapData[i][j] == '1', new Vector2(j - mapSizeY / 2, mapSizeX - i - mapSizeX / 2));
-	//			nodes[i, j] = new MapNode(mapData[i][j] == '1', i, j);
-	//		}
-	//	}
-	//}
-
 	public void InitGrid(int sizeX, int sizeY)
 	{
 		nodes = new MapNode[sizeX, sizeY];

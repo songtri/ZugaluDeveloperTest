@@ -77,7 +77,8 @@ public class GameHandler : MonoBehaviour
 						if (selectedObject != null)
 						{
 							ShowMoveIndicator(hit.point);
-							selectedObject.MoveTo(hit.point);
+							if (selectedObject is Movable)
+								(selectedObject as Movable).MoveTo(hit.point);
 						}
 					}
 					else

@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 		var moveDir = targetPos - transform.position;
 		moveDir.y = 0f;
 
-		if (moveDir.sqrMagnitude < 0.001f)
+		if (moveDir.sqrMagnitude < 0.01f)
 			Destroy(gameObject);
 
 		moveDir.Normalize();

@@ -55,34 +55,6 @@ public class Actor : MonoBehaviour
 		onDeselectHandler?.Invoke();
 	}
 
-	public void MoveTo(Vector3 destPos)
-	{
-		moveToPosition = destPos;
-		isMoving = true;
-
-		var curNode = gameHandler.MapGrid.FindNodeByWorldPos(transform.position);
-		var destNode = gameHandler.MapGrid.FindNodeByWorldPos(destPos);
-		if (curNode != null && destNode != null && curNode != destNode)
-		{
-			movePath = gameHandler.MapGrid.FindPath(curNode.x, curNode.y, destNode.x, destNode.y);
-			if (movePath.Count >= 2)
-			{
-				currentMoveIndex = 1;
-				intermediateMoveToPosition = movePath[currentMoveIndex].worldPos;
-				intermediateMoveToPosition.y = transform.position.y;
-				return;
-			}
-		}
-
-		Debug.Log("Same node, just moving");
-		intermediateMoveToPosition = destPos;
-		intermediateMoveToPosition.y = transform.position.y;
-	}
-
-	public virtual void OnAttack(Actor target)
-	{
-	}
-
 	public virtual void OnAttacked(Actor attacker)
 	{
 	}
